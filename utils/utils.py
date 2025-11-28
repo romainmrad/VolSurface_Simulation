@@ -1,5 +1,7 @@
 import seaborn as sns
 import matplotlib.pyplot as plt
+from scipy.stats import norm
+import numpy as np
 
 
 def plot_beta(df) -> None:
@@ -28,3 +30,39 @@ def plot_beta(df) -> None:
     axes[2].legend(loc='upper right', fontsize=10)
     plt.tight_layout()
     plt.show()
+
+def sigma_model(M, T, beta_vec):
+    """
+    Volatility surface model
+    :param M: Moneyness
+    :param T: Maturity
+    :param beta_vec: beta vector
+    :return: Volatility
+    """
+    T_CONV = 0.25
+    T_MAX = 5
+    b1, b2, b3, b4, b5 = beta_vec
+    term1 = b1
+    term2 = b2 * np.exp(-np.sqrt(T / T_CONV))
+    slope_pos = M
+    slope_neg = (np.exp(2 * M) - 1) / (np.exp(2 * M) + 1)
+    term3 = b3 * np.where(M >= 0, slope_pos, slope_neg)
+    term4 = b4 * (1 - np.exp(-M ** 2)) * np.log(T / T_MAX)
+    smirk = (1 - np.exp((3 * M) ** 3)) * np.log(T / T_MAX)
+    term5 = b5 * np.where(M < 0, smirk, 0.0)
+    return term1 + term2 + term3 + term4 + term5
+
+
+def BS_PUT(F, K, T, r, sigma):
+    """
+    Compute Black-Scholes Put option price
+    :param F: forward
+    :param K: strike
+    :param T: maturity
+    :param r: risk-free rate
+    :param sigma: volatility
+    :return: Put option price
+    """
+    d1 = (np.log(F / K) + (r + sigma ** 2 / 2) * T) / (sigma * np.sqrt(T))
+    d2 = d1 - sigma * np.sqrt(T)
+    return K * np.exp(-r * T) * norm.cdf(-d2) - F * norm.cdf(-d1)
