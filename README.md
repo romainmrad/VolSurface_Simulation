@@ -4,15 +4,12 @@
 
 This project builds a full pipeline to model, simulate, and forecast implied volatility surfaces using a low dimensional parametric model driven by latent beta factors. The goal is to extract daily surface dynamics from market data, model their statistical behavior, and produce forward looking implied volatility surfaces from simulated factor paths.
 
-The workflow is split into three main notebooks that handle data preparation, beta extraction, and stochastic simulation.
-
 ## Project Structure
 
-```
-01_DataLoader.ipynb
-02_BetaExtraction.ipynb
-03_BetaSimulation.ipynb
-```
+The [notebooks](notebooks) directory contains all the code for this project separated in 3 notebooks:
+- `01_DataLoader.ipynb` fetches all the data
+- `02_BetaExtraction.ipynb` extracts the IV surface parameter timeseries from the data
+- `03_BetaSimulation.ipynb` simulates parameter trajectories and uses results for risk-management
 
 ## Requirements
 
