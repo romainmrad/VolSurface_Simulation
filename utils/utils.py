@@ -31,6 +31,7 @@ def plot_beta(df) -> None:
     plt.tight_layout()
     plt.show()
 
+
 def sigma_model(M, T, beta_vec):
     """
     Volatility surface model
