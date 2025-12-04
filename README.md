@@ -11,6 +11,8 @@ The [notebooks](notebooks) directory contains all the code for this project sepa
 - `02_BetaExtraction.ipynb` extracts the IV surface parameter timeseries from the data
 - `03_BetaSimulation.ipynb` simulates parameter trajectories and uses results for risk-management
 
+The [utils](notebooks/utils.py) file contains some functions used in the notebooks 2 and 3.
+
 ## Requirements
 
 ```
