@@ -17,13 +17,29 @@ The workflow is split into three main notebooks that handle data preparation, be
 ## Requirements
 
 ```
+scipy
+plotly
+scikit-learn
+hmmlearn
+seaborn
+matplotlib
+wrds
+tqdm
 numpy
 pandas
-scipy
-matplotlib
-plotly
-hmmlearn
-wrds
+```
+
+## Download and set up
+
+To download the project, run:
+```shell
+git clone https://github.com/romainmrad/VolSurface_Simulation.git
+```
+Then set up the environment:
+```shell
+python -m venv .venv
+source .venv/bin/activate
+pip3 install -r requirements.txt
 ```
 
 ## Mathematical Framework
